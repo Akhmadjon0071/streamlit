@@ -18,3 +18,18 @@ else:
     os.chdir(r"/home/akhmadjon/Documents/github")
 df=pd.read_csv("sample.csv", encoding="UTF-8")
 
+#date
+
+col1,col2=st.columns((2))
+df['Order Date']=pd.to_datetime(df['Order Date'])
+
+startDate=pd.to_datetime(df['Order Date']).min()
+endDate=pd.to_datetime(df['Order Date']).max()
+
+with col1:
+    date1=pd.to_datetime(st.date_input("Start date",startDate))
+    
+with col2:
+    date2=pd.to_datetime(st.date_input("End date",endDate))
+    
+df=df[(df["Order Date"]>=date1)&(df["Order Date"]<=date2)].copy()
