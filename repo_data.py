@@ -45,5 +45,32 @@ else:
     df2=df[df["Region"].isin(region)]
     
 state=st.sidebar.multiselect("Pick your State",df2["State"].unique())
+if not state:
+    df3=df2.copy()
+else:
+    df3=df2[df["State"].isin(state)]
 
-city=st.sidebar.multiselect("Pick your City",df2["City"].unique())
+city=st.sidebar.multiselect("Pick your City",df3["City"].unique())
+# if not city:
+#     df4=df3.copy()
+# else:
+#     df4=df3[df["City"].isin(city)]
+
+#filter data
+
+if not region and not state and not city:
+    filtered_df=df
+elif not state and not city:
+    filtered_df=df[df["Region"].isin(region)]
+elif not region and not city:
+    filtered_df=df[df["State"].isin(state)]
+elif state and city:
+    filtered_df=df3[df["State"].isin(state)&df3["City"].isin(city)]
+elif region and city:
+    filtered_df=df3[df["State"].isin(region)&df3["City"].isin(city)]
+elif region and state:
+    filtered_df=df3[df["State"].isin(region)&df3["City"].isin(state)]
+elif city:
+    filtered_df=df3[df3["City"].isin(city)]
+else:
+    filtered_df=df3[df3["Region"].isin(region)&["State"].isin(state)&df3["City"].isin(city)]
