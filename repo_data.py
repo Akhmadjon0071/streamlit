@@ -129,3 +129,18 @@ fig3=px.treemap(filtered_df,path=["Region","Category","Sub-Category"],values="Sa
                 color="Sub-Category")
 fig3.update_layout(width=800,height=650)
 st.plotly_chart(fig3,use_container_width=True)
+
+#Segment
+
+chart1,chart2=st.columns((2))
+with chart1:
+    st.subheader("Segment wise Sales")
+    fig=px.pie(filtered_df,values="Sales",names="Segment",template="plotly_dark")
+    fig.update_traces(text=filtered_df["Segment"],textposition="inside")
+    st.plotly_chart(fig,use_container_width=True)
+    
+with chart2:
+    st.subheader("Category wise Sales")
+    fig=px.pie(filtered_df,values="Sales",names="Category",template="gridon")
+    fig.update_traces(text=filtered_df["Category"],textposition="inside")
+    st.plotly_chart(fig,use_container_width=True)
