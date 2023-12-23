@@ -116,3 +116,8 @@ linechart=pd.DataFrame(filtered_df.groupby(filtered_df["month_year"].dt.strftime
 fig2=px.line(linechart,x="month_year",y="Sales",labels={"Sales":"Amount"},height=500,width=1000,template="gridon")
 st.plotly_chart(fig2,use_container_width=True)
 
+#TimeSeries_dataDownload
+with st.expander("View Data of TimeSeries:"):
+    st.write(linechart.T.style.background_gradient(cmap="Blues"))
+    csv=linechart.to_csv(index=False).encode("utf-8")
+    st.download_button("Download Data",data=csv,file_name="TimeSeries.csv",mime="text/csv")
