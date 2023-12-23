@@ -121,3 +121,11 @@ with st.expander("View Data of TimeSeries:"):
     st.write(linechart.T.style.background_gradient(cmap="Blues"))
     csv=linechart.to_csv(index=False).encode("utf-8")
     st.download_button("Download Data",data=csv,file_name="TimeSeries.csv",mime="text/csv")
+    
+#TreeMap
+
+st.subheader("Hierarchical view of Sales using TreeMap")
+fig3=px.treemap(filtered_df,path=["Region","Category","Sub-Category"],values="Sales",hover_data=["Sales"],
+                color="Sub-Category")
+fig3.update_layout(width=800,height=650)
+st.plotly_chart(fig3,use_container_width=True)
